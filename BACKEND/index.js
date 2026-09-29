@@ -42,7 +42,10 @@ const PORT =
 // Permitir conexión desde React
 app.use(
   cors({
-    origin: 'http://localhost:5173',
+    origin: [
+      'http://localhost:5173',
+      'https://practica4-recawqvkf-ingenieria-web1.vercel.app'
+    ],
     credentials: true
   })
 );
@@ -139,15 +142,7 @@ app.use(
 // ========================================
 
 const iniciarServidor = async () => {
-
   try {
-
-    // Comprobamos primero la conexión
-    // con SQL Server.
-    // con PostgreSql
-
-    // Comprobar conexión con PostgreSQL
-//await getConnection();
     await getConnection.query('SELECT 1');
 
     console.log(
@@ -157,28 +152,24 @@ const iniciarServidor = async () => {
     app.listen(
       PORT,
       () => {
-
         console.log(
           `Servidor backend corriendo en http://localhost:${PORT}`
         );
-
       }
     );
-
-
   } catch (error) {
-
     console.error(
       'No se pudo iniciar el servidor:',
       error
     );
-
     process.exit(1);
-
   }
-
 };
 
+if (process.env.NODE_ENV !== 'production') {
+  iniciarServidor();
+}
 
-iniciarServidor();
+export default app;
+
 //en este index ya tenemos 2 endpoints uno que es el GET y otro que es el POST
