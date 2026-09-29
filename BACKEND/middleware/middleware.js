@@ -1,4 +1,3 @@
-```js
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 
@@ -110,7 +109,6 @@ export const verificarToken = (
     // Guardamos los datos del JWT
     // para que los controllers
     // puedan utilizarlos.
-
     req.usuario =
       usuario;
 
@@ -146,7 +144,6 @@ export const soloAdministrador = (
   res,
   next
 ) => {
-
 
   // ========================================
   // COMPROBAR QUE EXISTA USUARIO
@@ -187,10 +184,15 @@ export const soloAdministrador = (
 // ========================================
 // SABER SI UN USUARIO ES SUPERADMIN
 //
-// PostgreSQL utiliza boolean:
+// Se utiliza desde los controllers.
+//
+// Puede recibir:
 //
 // es_superadmin = true
-// es_superadmin = false
+//
+// o:
+//
+// es_superadmin = 1
 // ========================================
 
 export const esSuperAdministrador = (
@@ -203,8 +205,8 @@ export const esSuperAdministrador = (
 
 
   return (
-    usuario.es_superadmin === true
+    usuario.es_superadmin === true ||
+    usuario.es_superadmin === 1
   );
 
 };
-```
