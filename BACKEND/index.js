@@ -80,10 +80,12 @@ app.get(
 // POST /api/sqlserver/users
 // ========================================
 
-app.use(
+/**
+ * app.use(
   '/api/sqlserver',
   authRoutes
 );
+ */
 
 app.use(
   '/api/postgresql',
@@ -103,14 +105,16 @@ app.use(
 // DELETE /api/sqlserver/users/:id
 // ========================================
 
-app.use(
+/**
+ * app.use(
   '/api/sqlserver/users',
   usersRoutes
 );
+ */
 
 app.use(
   '/api/postgresql/users',
-  usersRoutesPostgre
+  usersRoutes
 );
 
 
@@ -141,8 +145,14 @@ const iniciarServidor = async () => {
     // Comprobamos primero la conexión
     // con SQL Server.
     // con PostgreSql
-    await getConnection();
 
+    // Comprobar conexión con PostgreSQL
+//await getConnection();
+    await getConnection.query('SELECT 1');
+
+    console.log(
+      'Conexión con PostgreSQL exitosa'
+    );
 
     app.listen(
       PORT,
