@@ -44,12 +44,25 @@ app.use(
   cors({
     origin: [
       'http://localhost:5173',
-      'https://practica4-recawqvkf-ingenieria-web1.vercel.app'
+      'https://practica4-neon.vercel.app'
     ],
+
+    methods: [
+      'GET',
+      'POST',
+      'PUT',
+      'DELETE',
+      'OPTIONS'
+    ],
+
+    allowedHeaders: [
+      'Content-Type',
+      'Authorization'
+    ],
+
     credentials: true
   })
 );
-
 
 // Permitir recibir JSON
 app.use(
@@ -171,5 +184,3 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 export default app;
-
-//en este index ya tenemos 2 endpoints uno que es el GET y otro que es el POST
